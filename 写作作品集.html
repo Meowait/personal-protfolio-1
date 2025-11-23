@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的作品集</title>
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44b5;
+            --accent-color: #ff6584;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+		
+		a {
+            color: inherit;
+            text-decoration: none;
+          }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f7;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 英雄区域样式 */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--gray-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* 作品集筛选器样式 */
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            padding: 8px 20px;
+            margin: 5px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--gray-color);
+            transition: var(--transition);
+            border-radius: 30px;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* 作品集网格样式 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .portfolio-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .portfolio-content p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #e9ecef;
+            color: var(--gray-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container"> </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>超文本写作作品集</h1>
+            <p>展示我新怪谈论坛网站中创作的超文本写作作品。</p>
+
+        </div>
+    </section>
+
+    <!-- 作品集区域 -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="container">
+
+
+            <div class="portfolio-grid">
+                <!-- 项目1 -->
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-img">
+                    <a href="https://scp-wiki-cn.wikidot.com/sovereignty-and-corporation"><img src="https://scpsandboxcn.wikidot.com/local--files/meowait2/bookcover" alt="文件1"></a> </div>
+                    <div class="portfolio-content">
+                        <h3><a href="https://scp-wiki-cn.wikidot.com/sovereignty-and-corporation">主权与法人：赛博朋克时代的政治实体研究</a></h3>
+<p>于赛博朋克世界观框架下创作的元虚构书评，探讨了赛博朋克世界观中政治实体的谱系沿革</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">元虚构文本</span>
+                            <span class="tag">虚构书评</span>
+                            <span class="tag">社会科学</span>
+							<span class="tag">文化评论</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目2 -->
+                <div class="portfolio-item" data-category="app">
+                    <div class="portfolio-img">
+                    <a href="https://scp-wiki-cn.wikidot.com/the-lord-of-jambudvipa"><img src="https://scpsandboxcn.wikidot.com/local--files/meowait/anime_girl_1" alt="项目2"></a> </div>
+                    <div class="portfolio-content">
+                        <h3><a href="https://scp-wiki-cn.wikidot.com/the-lord-of-jambudvipa">赡部洲之主</a></h3>
+<p>架空历史、拼贴艺术、氛围营造、陌异性写作</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">拼贴艺术</span>
+                            <span class="tag">架空历史</span>
+                            <span class="tag">超文本艺术</span>
+                            <span class="tag">梦核</span>
+							<span class="tag">亚文化</span>
+                        </div>
+                  </div>
+                </div>
+
+                <!-- 项目3 -->
+                <div class="portfolio-item" data-category="branding">
+                    <div class="portfolio-img">
+                    <a href="https://scp-wiki-cn.wikidot.com/uranusday"><img src="http://scpsandboxcn.wikidot.com/local--files/meowait2/sc-small-3" alt="项目3"></a> </div>
+                    <div class="portfolio-content">
+                        <h3><a href="https://scp-wiki-cn.wikidot.com/uranusday">星期八再见（部分发现、来源不明的中国儿童节目；2007年之前）</a></h3>
+<p>元虚构写作，模仿失传媒体wiki的页面格式，具备千禧年怀旧元素的“伪失传媒体”</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">元虚构写作</span>
+                            <span class="tag">怀旧</span>
+                            <span class="tag">千禧年风格</span>
+                        </div>
+                  </div>
+                </div>
+
+                <!-- 项目4 -->
+                <div class="portfolio-item" data-category="uiux">
+                    <div class="portfolio-img">
+                    <a href="https://scp-wiki-cn.wikidot.com/meowait-s-proposal"><img src="http://scpsandboxcn.wikidot.com/local--files/meowait/fascism" alt="项目4"></a> </div>
+                    <div class="portfolio-content">
+                        <h3><a href="https://scp-wiki-cn.wikidot.com/meowait-s-proposal">SCP-CN-001：Meowait的提案-“衰世”</a></h3>
+<p>现代性的迷思</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">游戏式写作</span>
+                            <span class="tag">社会科学</span>
+                            <span class="tag">文化评论</span>
+                        </div>
+                  </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于我</h3>
+                    <p>兴趣使然的创作者</p>
+
+                </div>
+
+                <div class="footer-column">
+                    <h3>联系信息</h3>
+                    <ul class="footer-links">
+                        <li>邮箱: trantor-meow@foxmail.com</li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // 移动菜单切换
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // 作品筛选功能
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有按钮的active类
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // 为当前点击的按钮添加active类
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
